@@ -1,8 +1,8 @@
 # подключение к dldb 
 
 <!-- 
-login = yura
-password  = ivanov24.07
+login = sergei
+password  = S714801t
 host = 51.250.54.232
 name_db = dldb 
 -->
@@ -11,8 +11,8 @@ name_db = dldb
 
 <!-- 
 from sqlalchemy import create_engine
-engine = create_engine('postgresql://yura:ivanov24.07@51.250.54.232:5432/dldb')
-датасет.to_sql('название таблицы', engine, schema = 'yura', if_exists='append', index = False) 
+engine = create_engine('postgresql://sergei:S714801t@51.250.54.232:5432/dldb')
+датасет.to_sql('название таблицы', engine, schema = 'sergei', if_exists='append', index = False) 
 -->
 
 
