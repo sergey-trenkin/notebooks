@@ -1,2 +1,14 @@
-sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1WVtUVS_wRAUp-3OTyLhG3vMDoMZgvzu1UJs8qwAsvBU/edit#gid=216694253')
-sh_outlets = gc.open_by_url('https://docs.google.com/spreadsheets/d/1rrMyh7rAQ_08JqgyPPMfF3-Pl-TsA3CRBfgnF3Zm1rU/edit#gid=0')
+# Загрузка данных из гугл таблицы
+gc = gs.service_account(filename='C:\\friendly-slate-320014-d9476dff834f.json')
+sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1gJP5Gz_e3lEfF5wF3AScxAte04iQYQtb7W8zHZcTH0A/edit#gid=0')
+ws = sh.worksheet('plan')
+df_plan = pd.DataFrame(ws.get_all_records())
+# Преобразование столбца 'date' в тип данных "date" в DataFrame df_plan
+df_plan['date'] = pd.to_datetime(df_plan['date'], format='%d.%m.%Y')
+# df_plan['date'] = df_plan['date'].dt.date
+# df_plan['plan'] = pd.to_numeric(df_plan['plan'], errors='coerce')
+print(df_plan.dtypes)
+
+# Объединение данных из SQL и Google таблицы
+df_combined = pd.merge(df, df_plan, on='date', how='inner')
+print(df_combined.columns)
