@@ -1,3 +1,2 @@
-https://docs.google.com/spreadsheets/d/1gJP5Gz_e3lEfF5wF3AScxAte04iQYQtb7W8zHZcTH0A/edit?gid=122883511#gid=122883511
-
-https://docs.google.com/spreadsheets/d/1gJP5Gz_e3lEfF5wF3AScxAte04iQYQtb7W8zHZcTH0A/edit?gid=122883511#gid=122883511
+sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1WVtUVS_wRAUp-3OTyLhG3vMDoMZgvzu1UJs8qwAsvBU/edit#gid=216694253')
+sh_outlets = gc.open_by_url('https://docs.google.com/spreadsheets/d/1rrMyh7rAQ_08JqgyPPMfF3-Pl-TsA3CRBfgnF3Zm1rU/edit#gid=0')
