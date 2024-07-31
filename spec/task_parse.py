@@ -5,23 +5,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from bs4 import BeautifulSoup as bs 
-import datetime as dt 
-import pandas as pd 
-import pymssql
 import time 
 import warnings
-import glob 
-import os
 
 warnings.filterwarnings('ignore')
 
-options_chrome = webdriver.ChromeOptions()
 cService = webdriver.ChromeService(executable_path=r'C:\Users\Trenkin.Sergey\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe') # указать путь до хромдрайвера
 
 # https://googlechromelabs.github.io/chrome-for-testing/#stable 
 # по ссылке можно скачать версию chromedriver актуальную для машины
 
-browser = webdriver.Chrome(service = cService, options=options_chrome)
+browser = webdriver.Chrome(service = cService)
 actions = ActionChains(browser)
 
 browser.get('https://cccb.ru/')
@@ -52,12 +46,4 @@ browser.find_element(By.XPATH, '//*[@id="lk_tab-1"]/div/div/form/div/div/input[2
 time.sleep(5)
 browser.close()
 
-path = r'C:\\Users\Trenkin.Sergey\Downloads\\' # указать папку, в которую падает файл после загрузки
-list_of_files = glob.glob(f'{path}Otchet_po_otpravleniyam*.xlsx') 
-latest_file = max(list_of_files, key=os.path.getctime)
-
-df = pd.read_excel(latest_file, header=6)
-df.drop(columns=['Unnamed: 0'], inplace=True)
-
-df['report_date']= pd.to_datetime(dt.date.today().strftime('%Y-%m-%d'))
 
