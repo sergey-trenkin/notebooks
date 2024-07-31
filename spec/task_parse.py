@@ -15,6 +15,15 @@ import os
 
 warnings.filterwarnings('ignore')
 
+options_chrome = webdriver.ChromeOptions()
+cService = webdriver.ChromeService(executable_path=r'C:\Users\Trenkin.Sergey\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe') # указать путь до хромдрайвера
+
+# https://googlechromelabs.github.io/chrome-for-testing/#stable 
+# по ссылке можно скачать версию chromedriver актуальную для машины
+
+browser = webdriver.Chrome(service = cService, options=options_chrome)
+actions = ActionChains(browser)
+
 browser.get('https://cccb.ru/')
 time.sleep(1)
 browser.find_element(By.XPATH, '/html/body/header/div[1]/div/div[1]/a[3]').click()
