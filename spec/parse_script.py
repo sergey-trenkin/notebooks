@@ -1,37 +1,21 @@
-from datetime import datetime
-from airflow.operators.python_operator import PythonOperator
-from airflow import DAG 
-from airflow.decorators import task
-from airflow.hooks.base import BaseHook
-import boto3
-import os
-from os import path
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+from datetime import timedelta
+from bs4 import BeautifulSoup as bs 
+from selenium.webdriver.common.keys import Keys
+import time
 
-default_args = {
-    'owner': 'trenkin.sergey',
-    'email': ['Trenkin.Sergey@zolotoy.ru'],
-    'email_on_failure': False,
-}
+def scrape():
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
 
-def parse_specsvyaz():
-    from selenium.webdriver.common.action_chains import ActionChains
-    from selenium.webdriver.support import expected_conditions as EC
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.common.keys import Keys
-    from selenium import webdriver
-    from bs4 import BeautifulSoup as bs 
-    import time 
-    import warnings
-
-    warnings.filterwarnings('ignore')
-
-    cService = webdriver.ChromeService(executable_path=r'C:\Users\Trenkin.Sergey\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe') # указать путь до хромдрайвера
-
-    # https://googlechromelabs.github.io/chrome-for-testing/#stable 
-    # по ссылке можно скачать версию chromedriver актуальную для машины
-
-    browser = webdriver.Chrome(service = cService)
+    browser = webdriver.Chrome(options=options)
+    
     actions = ActionChains(browser)
 
     browser.get('https://cccb.ru/')
@@ -61,6 +45,3 @@ def parse_specsvyaz():
     browser.find_element(By.XPATH, '//*[@id="lk_tab-1"]/div/div/form/div/div/input[2]').click()
     time.sleep(5)
     browser.close()
-    
-
-
